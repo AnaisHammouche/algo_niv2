@@ -12,7 +12,7 @@ function readJson(path) {
 
 
 function writeJson(data, outputfile) {
-    let donnees = JSON.stringify(data);
+    let donnees = JSON.stringify(data, null, '\t');
     fs.writeFileSync(outputfile, donnees);
 }
 
