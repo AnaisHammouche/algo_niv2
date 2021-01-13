@@ -2,6 +2,7 @@
 module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide, searchBinarie, decremente, incremente, display, getAllMoviesByKey, getAllMoviesByGenre };
 
 const fs = require('fs');
+const { nextTick } = require('process');
 
 
 function readJson(path) {
@@ -55,14 +56,16 @@ function getAllMoviesByKey(array, keyword){
     return arrayKey;
 }
 function getAllMoviesByGenre(array, genre){
-    array.forEach( elem => {
-        let key = elem.genres;
-        if(key.includes(genre)){
-            // console.log("Titre : " + elem.title + "\nDescription : " + elem.overview + "\nGenre : " + elem.genres + "\n");
-            // console.log("Titre : " + elem.title);
-            console.log(elem);
+    let tab = [];
+    for(let i = 0; i < array.length; i++){
+        if(array[i].genres){
+            if(array[i].genres.includes(genre)){
+                tab.push(array[i])
+            }
         }
-    });
+    }
+    return tab[0];
+    
 }
 
 function tri_rapide(t, first, last, sortBy) {

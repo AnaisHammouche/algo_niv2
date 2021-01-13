@@ -68,8 +68,9 @@ if(args[2] === undefined){
                     case "search_keyword":  // 5: keyword  6: genre
                         console.log("keyword: " + args[5] + " | genre: " + args[6] + "\n");
                         data = f.tri_rapide(movies, 0, movies.length - 1, "release_date");
+                        console.log(f.getAllMoviesByGenre(f.getAllMoviesByKey(data, args[5]), args[6]));
                         
-                        f.getAllMoviesByGenre(f.getAllMoviesByKey(data, args[5]), args[6]);
+                        
                         break;
 
 
