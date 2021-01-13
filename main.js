@@ -11,6 +11,11 @@ const f = require('./fonctions.js');
 // f.writeJson(data, './modif.json');
 // const movies2 = f.readJson('./modif.json');
 
+// const index = f.searchBinarie(movies, 0, movies.length - 1, args[5]);
+// const min = f.decremente(movies, index, args[5]);
+// const max = f.incremente(movies, index, args[5]);
+// f.display(movies, min, max);
+
 // // console.log(movies[0].title);
 
 
@@ -46,7 +51,6 @@ if(args[2] === undefined){
                         f.writeJson(data, args[5]);
                         break;
                     case "sort_title":
-                        movies = f.readJson(args[4]);
                         data = f.tri_rapide(movies, 0, movies.length - 1, "title");
                         f.writeJson(data, args[5]);
                         break;
@@ -54,8 +58,11 @@ if(args[2] === undefined){
                         if (args[6] === "false") {
                             f.getAllMoviesByDate(movies, args[5]);
                         }
-                        else {
-                            // FONCTION A IMPLEMENTER
+                        if (args[6] === "true") {
+                            const index = f.searchBinarie(movies, 0, movies.length - 1, args[5]);
+                            const min = f.decremente(movies, index, args[5]);
+                            const max = f.incremente(movies, index, args[5]);
+                            f.display(movies, min, max);
                         }
                         break;
                     case "search_keyword":

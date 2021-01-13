@@ -1,5 +1,5 @@
 
-module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide };
+module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide, searchBinarie, decremente, incremente, display };
 
 const fs = require('fs');
 
@@ -35,7 +35,7 @@ function getAllMoviesByDate(array, years) {
         let year = convertToYear(elem.release_date);
         if (year == years) {
             found = true;
-            console.log("Titre : " + elem.title + " (" + year + ")");
+            console.log(elem.title + " (" + year + ")");
         }
     });
     if (!found) {
@@ -80,4 +80,37 @@ function partitionner(t, first, last, pivot, sortBy) {
     }
     swap(t, last, j);
     return j;
+}
+
+function searchBinarie(tableau, min, max, search) {
+    let index = Math.floor((min + max) / 2);
+
+    if (search == convertToYear(tableau[index].release_date)) {
+        return index;
+    }
+    if (search < convertToYear(tableau[index].release_date)) {
+        return searchBinarie(tableau, min, index - 1, search);
+    }
+    else {
+        return searchBinarie(tableau, index + 1, max, search);
+    }
+}
+
+function decremente(array, index, search) {
+    for (i = index; convertToYear(array[i].release_date) == search; i--) {
+        index = i;
+    }
+    return index;
+}
+function incremente(array, index, search) {
+    for (i = index; convertToYear(array[i].release_date) == search; i++) {
+        index = i;
+    }
+    return index;
+}
+
+function display(array, min, max) {
+    for (i = min; i <= max; i++) {
+        console.log(array[i].title);
+    }
 }
