@@ -4,12 +4,15 @@ const f = require('./fonctions.js');
 
 // let start = new Date().getTime(); // Début du temps d'exécution du programme
 
-// const movies = f.readJson('./movies.json');
+// const movies = f.readJson('./test.json');
 // // const data = f.getAllTitleAndYear(movies);
-// // f.writeJson(data, './modif.json');
-// // const movies2 = f.readJson('./modif.json');
+// const data = f.tri_rapide(movies, 0, movies.length - 1, "release_date");
+// f.getAllTitleAndYear(data);
+// f.writeJson(data, './modif.json');
+// const movies2 = f.readJson('./modif.json');
 
-// f.getAllMoviesByDate(movies, 2018);
+// // console.log(movies[0].title);
+
 
 // let stop = new Date().getTime(); // Fin du temps d'exécution du programme
 // console.log("Execution time : " + (stop-start) + " ms"); // Afficher temps d'exécution du programme
@@ -28,22 +31,32 @@ if(args[2] === undefined){
             if(args[3] === "transform" || args[3] === "sort_date" ||
             args[3] === "sort_title" || args[3] === "search_date" ||
             args[3] === "search_keyword" || args[3] === undefined){
+                const movies = f.readJson(args[4]);
+                let data;
                 // J'observe l'argument à l'index 3
                 switch (args[3]) {
                     // Dans le cas où l'argument à l'index 3 est "transform" j'effectue les actions ci-dessous
                     case "transform":
-                        const movies = f.readJson(args[4]);
-                        const data = f.getAllTitleAndYear(movies);
+                        data = f.getAllTitleAndYear(movies);
                         f.writeJson(data, args[5]);
                         break;
                     case "sort_date":
-                        console.log("Triage par date");
+                        data = f.tri_rapide(movies, 0, movies.length - 1, "release_date");
+                        data = f.getAllTitleAndYear(movies);
+                        f.writeJson(data, args[5]);
                         break;
                     case "sort_title":
-                        console.log("Triage par titre");
+                        movies = f.readJson(args[4]);
+                        data = f.tri_rapide(movies, 0, movies.length - 1, "title");
+                        f.writeJson(data, args[5]);
                         break;
                     case "search_date":
-                        console.log("Recherche par date");
+                        if (args[6] === "false") {
+                            f.getAllMoviesByDate(movies, args[5]);
+                        }
+                        else {
+                            // FONCTION A IMPLEMENTER
+                        }
                         break;
                     case "search_keyword":
                         console.log("Recherche par mot clé");
