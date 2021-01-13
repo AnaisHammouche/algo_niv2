@@ -1,5 +1,5 @@
 
-module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide };
+module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide, getAllMoviesByKey, getAllMoviesByGenre };
 
 const fs = require('fs');
 
@@ -41,6 +41,28 @@ function getAllMoviesByDate(array, years) {
     if (!found) {
         console.log("Aucun Film correspondant à l\'année " + years + " n'a été trouvé")
     }
+}
+
+function getAllMoviesByKey(array, keyword){
+    let arrayKey = [];
+    array.forEach( elem => {
+        let key = elem.overview;
+        if(key.includes(keyword)){
+            // console.log("Titre : " + elem.title + "\nDescription : " + elem.overview);
+            arrayKey.push(elem);
+        }
+    });
+    return arrayKey;
+}
+function getAllMoviesByGenre(array, genre){
+    array.forEach( elem => {
+        let key = elem.genres;
+        if(key.includes(genre)){
+            // console.log("Titre : " + elem.title + "\nDescription : " + elem.overview + "\nGenre : " + elem.genres + "\n");
+            // console.log("Titre : " + elem.title);
+            console.log(elem);
+        }
+    });
 }
 
 function tri_rapide(t, first, last, sortBy) {
