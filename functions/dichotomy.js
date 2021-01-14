@@ -39,4 +39,11 @@ function display(array, min, max, save, folder = undefined) {
     }
 }
 
-module.exports = { searchBinarie, decremente, incremente, display };
+function searchAndDisplay(array, min, max, search, save, folder = undefined) {
+    const indexFound = searchBinarie(array, 0, array.length - 1, search);
+    min = decremente(array, indexFound, search);
+    max = incremente(array, indexFound, search);
+    display(array, min, max, save, folder);
+}
+
+module.exports = { searchAndDisplay };

@@ -8,9 +8,6 @@ const cli = require('./functions/checkCli.js');
 
 let start = new Date().getTime(); // Début du temps d'exécution du programme
 let args = process.argv; // On récupère les arguments en CLI
-// let tabTest = ["movies.json", "movies.out.json"];
-
-// f.checkParamFile(args[2], args[3]); // args[2], args[3] | tabTest[0], tabTest[1]
 
 if (args[2] === undefined) {
     console.log("Veuillez entrer \"-save\" ou \"-action\"");
@@ -54,16 +51,10 @@ else {
                         if (args[index + 4] === "true") {
                             if (args.includes("-save")) {
                                 const indexSave = cli.getIndex(args, "-save");
-                                const indexFound = search.searchBinarie(movies, 0, movies.length - 1, args[index + 3]);
-                                const min = search.decremente(movies, indexFound, args[index + 3]);
-                                const max = search.incremente(movies, indexFound, args[index + 3]);
-                                search.display(movies, min, max, true, args[indexSave + 1]);
+                                search.searchAndDisplay(movies, 0, movies.length - 1, args[index + 3], true, args[indexSave + 1]);
                             }
                             else {
-                                const indexFound = search.searchBinarie(movies, 0, movies.length - 1, args[index + 3]);
-                                const min = search.decremente(movies, indexFound, args[index + 3]);
-                                const max = search.incremente(movies, indexFound, args[index + 3]);
-                                search.display(movies, min, max, false);
+                                search.searchAndDisplay(movies, 0, movies.length - 1, args[index + 3], false);
                             }
                         }
                         if (args[index + 4] !== "true" && args[index + 4] !== "false") {
