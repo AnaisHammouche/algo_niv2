@@ -29,13 +29,18 @@ function convertToYear(times) {
     return year;
 }
 
-function getAllMoviesByDate(array, years) {
+function getAllMoviesByDate(array, years, save, folder = undefined) {
     let found = false;
     array.forEach (elem => {
         let year = convertToYear(elem.release_date);
         if (year == years) {
             found = true;
             console.log(elem.title + " (" + year + ")");
+            if (save) {
+                if (elem.poster) {
+                    downloadImg(elem.poster, folder, elem.title.replace(/[^a-zA-Z0-9]/g, ' '));
+                }
+            }
         }
     });
     if (!found) {
@@ -64,7 +69,6 @@ function getAllMoviesByGenre(array, genre){
         }
     }
     return tab[0];
-    
 }
 
 function tri_rapide(t, first, last, sortBy) {
@@ -133,9 +137,14 @@ function incremente(array, index, search) {
     return index;
 }
 
-function display(array, min, max) {
+function display(array, min, max, save, folder = undefined) {
     for (i = min; i <= max; i++) {
         console.log(array[i].title);
+        if (save) {
+            if (array[i].poster) {
+                downloadImg(array[i].poster, folder, array[i].title.replace(/[^a-zA-Z0-9]/g, ' '));
+            }
+        }
     }
 }
 
@@ -157,9 +166,7 @@ download = (url, folder, filename, callback) => {
 
 function downloadImg(url, folder, filename) {
     checkFolderExist(folder);
-    download(url, folder, filename, () => {
-        console.log("Done");
-    })
+    download(url, folder, filename, () => {})
 }
 
 function getIndex(array, search) {
