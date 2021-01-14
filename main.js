@@ -4,7 +4,7 @@ const sort = require('./functions/quickSort.js');
 const search = require('./functions/dichotomy.js');
 const dl = require('./functions/downloadImg.js');
 const cli = require('./functions/checkCli.js');
-const { exception } = require('console');
+const times = require('./functions/times.js');
 
 
 let start = new Date().getTime(); // Début du temps d'exécution du programme
@@ -80,15 +80,15 @@ else {
                         }
                         else {
                             console.log("keyword: " + args[index + 3] + " | genre: " + args[index + 4]);
-                            data = sort.tri_rapide(movies, 0, movies.length - 1, "release_date");
-                            const movie = get.getAllMoviesByGenre(get.getAllMoviesByKey(data, args[index + 3]), args[index + 4]);
+                            const movie = get.getAllMoviesByGenre(get.getAllMoviesByKey(movies, args[index + 3]), args[index + 4]);
+                            data = sort.tri_rapide(movie, 0, movie.length - 1, "release_date");
                             if (args.includes("-save")) {
                                 const indexSave = cli.getIndex(args, "-save");
                                 dl.downloadImg(movie.poster, args[indexSave + 1], movie.title.replace(/[^a-zA-Z0-9]/g, ' '));
-                                console.log("Film trouvé : " + movie.title);
+                                console.log("Film trouvé : " + data[data.length - 1].title);
                             }
                             else {
-                                console.log("Film trouvé : " + movie.title);
+                                console.log("Film trouvé : " + data[data.length - 1].title + " (" + times.convertToYear(data[data.length - 1].release_date) + ")");
                             }
                         }
                         break;

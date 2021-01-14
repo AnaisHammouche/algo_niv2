@@ -10,11 +10,11 @@ function checkParamFile(inputFile, outputFile){
     let isValid = false;
     if(inputFile && outputFile){
         if(inputFile.endsWith(".json")){
-            console.log("END BY .JSON");
+            // console.log("END BY .JSON");
 
             try {
                 fs.statSync(inputFile);
-                console.log('file or directory exists');
+                // console.log('file or directory exists');
                 if(outputFile.endsWith(".json") || outputFile.endsWith(".txt")){
                     console.log('Fichier de sortie valide');
                     isValid = true;

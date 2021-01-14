@@ -49,7 +49,7 @@ function getAllMoviesByGenre(array, genre){
             }
         }
     }
-    return tab[tab.length - 1];
+    return tab;
 }
 
 module.exports = { getAllMoviesByDate, getAllMoviesByGenre, getAllMoviesByKey, getAllTitleAndYear };
