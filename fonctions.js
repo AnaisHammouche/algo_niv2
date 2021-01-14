@@ -1,9 +1,8 @@
 
-module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide, searchBinarie, decremente, incremente, display, getAllMoviesByKey, getAllMoviesByGenre };
+module.exports = { readJson, writeJson, getAllTitleAndYear, getAllMoviesByDate, tri_rapide, searchBinarie, decremente, incremente, display, getAllMoviesByKey, getAllMoviesByGenre, downloadImg, getIndex };
 
 const fs = require('fs');
-const { nextTick } = require('process');
-
+const request = require('request');
 
 function readJson(path) {
     const file = fs.readFileSync(path);
@@ -137,5 +136,34 @@ function incremente(array, index, search) {
 function display(array, min, max) {
     for (i = min; i <= max; i++) {
         console.log(array[i].title);
+    }
+}
+
+function checkFolderExist(folder) {
+    try {
+        fs.statSync(folder);
+    }
+    catch {
+        fs.mkdir(folder, callback => {
+        });
+    }
+}
+
+download = (url, folder, filename, callback) => {
+    request.head(url, (err, res, body) => {
+        request(url).pipe(fs.createWriteStream(folder + "/" + filename + ".png")).on('close', callback)
+    });
+}
+
+function downloadImg(url, folder, filename) {
+    checkFolderExist(folder);
+    download(url, folder, filename, () => {
+        console.log("Done");
+    })
+}
+
+function getIndex(array, search) {
+    if (array.includes(search)) {
+        return array.indexOf(search);
     }
 }
