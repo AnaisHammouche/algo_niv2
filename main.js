@@ -4,6 +4,7 @@ const sort = require('./functions/quickSort.js');
 const search = require('./functions/dichotomy.js');
 const dl = require('./functions/downloadImg.js');
 const cli = require('./functions/checkCli.js');
+const { exception } = require('console');
 
 
 let start = new Date().getTime(); // Début du temps d'exécution du programme
@@ -13,6 +14,16 @@ if (args[2] === undefined) {
     console.log("Veuillez entrer \"-save\" ou \"-action\"");
 }
 else {
+    if (args.includes("-save")) {
+        const index = cli.getIndex(args, "-save");
+        if (args[index + 1] === undefined) {
+            console.log("+-------------+ \n| Action List |\n+-------------+ \n   - transform <input.json> <output.json> \n   - sort_date <input.json> <output.json> \n   - sort_title <input.json> <output.json> \nFor the next actions, possibility to add an option \"-save\" <output folder> before the action\n   - search_date <input.json> <year> <sorted?> \n   - search_keyword <input.json> <keyword> <genre>");
+        }
+        else if (args[index + 1] === "-action") {
+            console.log("Veuillez entrer un nom de dossier avant l'action à effectuer");
+            return;
+        }
+    }
     if (args.includes("-action")) {
         const index = cli.getIndex(args, "-action");
 
@@ -73,7 +84,7 @@ else {
                             const movie = get.getAllMoviesByGenre(get.getAllMoviesByKey(data, args[index + 3]), args[index + 4]);
                             if (args.includes("-save")) {
                                 const indexSave = cli.getIndex(args, "-save");
-                                dl.downloadImg(movie.poster, args[indexSave + 1], movie.title.replace(/[^a-zA-Z0-9]/g));
+                                dl.downloadImg(movie.poster, args[indexSave + 1], movie.title.replace(/[^a-zA-Z0-9]/g, ' '));
                                 console.log("Film trouvé : " + movie.title);
                             }
                             else {
@@ -88,7 +99,7 @@ else {
             }
         }
         else if (args[index + 1] === undefined) {
-            console.log("Action List : \n - transform <input.json> <output.json> \n - sort_date <input.json> <output.json> \n - sort_title <input.json> <output.json> \n - search_date <input.json> <year> <sorted?> \n - search_keyword <input.json> <keyword> <genre>");
+            console.log("+-------------+ \n| Action List |\n+-------------+ \n   - transform <input.json> <output.json> \n   - sort_date <input.json> <output.json> \n   - sort_title <input.json> <output.json> \nFor the next actions, possibility to add an option \"-save\" <output folder> before the action\n   - search_date <input.json> <year> <sorted?> \n   - search_keyword <input.json> <keyword> <genre>");
         } else {
             console.log("<" + args[3] + ">" + " n'est pas reconnu comme une action. Veuillez entrer une action valide !");
         }
