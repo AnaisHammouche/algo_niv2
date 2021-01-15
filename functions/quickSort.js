@@ -45,6 +45,7 @@ function partitionner(t, first, last, pivot, sortBy) {
 
         if (sortBy === "title") { //si le type recherché est un titre
             if (t[i].title <= t[last].title) { // et si l'index du tableau des titres est <= au dernier index du tableau
+                swap(t, i, j);
                 j = j + 1; // on ajoute + 1 au premier élément du tableau
             }
         }
