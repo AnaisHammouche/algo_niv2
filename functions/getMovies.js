@@ -32,9 +32,8 @@ function getAllMoviesByDate(array, years, save, folder = undefined) {
 function getAllMoviesByKey(array, keyword){
     let arrayKey = [];
     array.forEach( elem => {
-        let key = elem.overview;
-        if(key.includes(keyword)){
-            // console.log("Titre : " + elem.title + "\nDescription : " + elem.overview);
+        let key = elem.overview.toLowerCase();
+        if(key.includes(keyword.toLowerCase())){
             arrayKey.push(elem);
         }
     });
@@ -49,7 +48,7 @@ function getAllMoviesByGenre(array, genre){
             }
         }
     }
-    return tab[tab.length - 1];
+    return tab;
 }
 
 module.exports = { getAllMoviesByDate, getAllMoviesByGenre, getAllMoviesByKey, getAllTitleAndYear };
