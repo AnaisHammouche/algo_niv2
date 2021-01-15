@@ -10,7 +10,9 @@ const times = require('./functions/times.js');
 let start = new Date().getTime(); // Début du temps d'exécution du programme
 let args = process.argv; // On récupère les arguments en CLI
 
-if (args[2] === undefined) {
+
+/* Vérification des arguments, dans la ligne de commande*/
+if (args[2] === undefined) { 
     console.log("Veuillez entrer \"-save\" ou \"-action\"");
 }
 else {
@@ -18,7 +20,7 @@ else {
         const index = cli.getIndex(args, "-save");
         if (args[index + 1] === undefined) {
             console.log("+-------------+ \n| Action List |\n+-------------+ \n   - transform <input.json> <output.json> \n   - sort_date <input.json> <output.json> \n   - sort_title <input.json> <output.json> \nFor the next actions, possibility to add an option \"-save\" <output folder> before the action\n   - search_date <input.json> <year> <sorted?> \n   - search_keyword <input.json> <keyword> <genre>");
-        }
+        }   
         else if (args[index + 1] === "-action") {
             console.log("Veuillez entrer un nom de dossier avant l'action à effectuer");
             return;

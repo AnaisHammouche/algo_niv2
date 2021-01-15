@@ -1,4 +1,4 @@
-
+/* fonction de tri rapide permettant de trier par type */
 function tri_rapide(t, first, last, sortBy) {
     if (first < last) {
         let pivot = Math.ceil((first + last) / 2);
@@ -9,28 +9,29 @@ function tri_rapide(t, first, last, sortBy) {
     return t;
 }
 
+/* fonction d'échange */
 function swap(t, a, b) {
     let temp = t[b];
     t[b] = t[a];
     t[a] = temp;
 }
 
+/* permet de partitioner les titres et dates du fichier json  et de retourner le premier element du tableau  après avoir échanger leurs places */
 function partitionner(t, first, last, pivot, sortBy) {
     swap(t, pivot, last);
     let j = first;
     for (i = first; i <= last - 1; i++) {
 
-        if (sortBy === "title") {
-            if (t[i].title <= t[last].title) {
-                swap(t, i, j);
-                j = j + 1;
+        if (sortBy === "title") { //si le type recherché est un titre
+            if (t[i].title <= t[last].title) { // et si l'index du tableau des titres est <= au dernier index du tableau
+                j = j + 1; // on ajoute + 1 au premier élément du tableau
             }
         }
         
-        if (sortBy === "release_date") {
-            if (t[i].release_date <= t[last].release_date) {
-                swap(t, i, j);
-                j = j + 1;
+        if (sortBy === "release_date") { //si le type recherché est une date
+            if (t[i].release_date <= t[last].release_date) { // et si l'index du tableau des titres est <= au dernier index du tableau
+                swap(t, i, j); 
+                j = j + 1; 
             }
         }
     }
@@ -38,21 +39,5 @@ function partitionner(t, first, last, pivot, sortBy) {
     return j;
 }
 
-function tri_bulle(array) {
-    let isSorted = false;
 
-    while (!isSorted) {
-        isSorted = true;
-        for (i = 0; i < array.length - 1; i++) {
-            next = array[i + 1];
-
-            if (array[i] > next) {
-                array[i + 1] = array[i];
-                array[i] = next;
-                isSorted = false;
-            }
-        }
-    }
-}
-
-module.exports = { tri_rapide, tri_bulle };
+module.exports = { tri_rapide };

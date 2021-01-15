@@ -7,11 +7,13 @@ download = (url, folder, filename, callback) => {
     });
 }
 
+/* permet de télécharger l'image d'un URL et de l'enregistrer dans un dossier */
 function downloadImg(url, folder, filename) {
     checkFolderExist(folder);
     download(url, folder, filename, () => {})
 }
 
+/* permet de vérifier si le dossier existe en renvoyant les détails du chemin du fichier existant sinon elle créera le dossier*/
 function checkFolderExist(folder) {
     try {
         fs.statSync(folder);

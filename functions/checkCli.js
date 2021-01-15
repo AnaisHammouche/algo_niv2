@@ -1,10 +1,18 @@
 const fs = require('fs');
 
-function getIndex(array, search) {
+/* permet de recuperer l'index du tableau */
+function getIndex(array, search) { 
     if (array.includes(search)) {
         return array.indexOf(search);
     }
 }
+
+/* permet de verifier si les paramètres des fichiers sont valides */
+/**
+ * 
+ * @param {*} inputFile 
+ * @param {*} outputFile 
+ */
 
 function checkParamFile(inputFile, outputFile){
     let isValid = false;

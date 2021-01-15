@@ -1,6 +1,7 @@
 const times = require('./times.js');
 const dl = require('./downloadImg.js');
 
+/* permet de récupérer les titres et années dans le tableau du fichier json et de les retourner après qu'ils ai été modifié avec le bon format*/
 function getAllTitleAndYear(array) {
     let result = array.map (elem => {
         let year = times.convertToYear(elem.release_date);
@@ -9,6 +10,10 @@ function getAllTitleAndYear(array) {
     });
     return result;
 }
+
+/* permet de récupérer tous les films par date du fichier json et d'executer une fontion de conversion des elements au format souhaité pour permettre aux dates
+de s'afficher au bon format + si l'element est save et si le lien vers l'image du film concerné est existant alors on pourra télécharger l'image du films concerné 
+sinon s'affichera un message dans la console*/
 
 function getAllMoviesByDate(array, years, save, folder = undefined) {
     let found = false;
@@ -29,6 +34,7 @@ function getAllMoviesByDate(array, years, save, folder = undefined) {
     }
 }
 
+/* permet de récupérer les films par clés et modifier leur typo en les transformants sans maj*/
 function getAllMoviesByKey(array, keyword){
     let arrayKey = [];
     array.forEach( elem => {
@@ -39,6 +45,8 @@ function getAllMoviesByKey(array, keyword){
     });
     return arrayKey;
 }
+
+/* permet de récupérer et de retourner les films par genre grâce à un mot clef donné */
 function getAllMoviesByGenre(array, genre){
     let tab = [];
     for(let i = 0; i < array.length; i++){
