@@ -84,8 +84,8 @@ else {
                             data = sort.tri_rapide(movie, 0, movie.length - 1, "release_date");
                             if (args.includes("-save")) {
                                 const indexSave = cli.getIndex(args, "-save");
-                                dl.downloadImg(movie.poster, args[indexSave + 1], movie.title.replace(/[^a-zA-Z0-9]/g, ' '));
-                                console.log("Film trouvé : " + data[data.length - 1].title);
+                                dl.downloadImg(data[data.length - 1].poster, args[indexSave + 1], data[data.length - 1].title.replace(/[^a-zA-Z0-9]/g, ' '));
+                                console.log("Film trouvé : " + data[data.length - 1].title + " (" + times.convertToYear(data[data.length - 1].release_date) + ")");
                             }
                             else {
                                 console.log("Film trouvé : " + data[data.length - 1].title + " (" + times.convertToYear(data[data.length - 1].release_date) + ")");

@@ -38,4 +38,21 @@ function partitionner(t, first, last, pivot, sortBy) {
     return j;
 }
 
-module.exports = { tri_rapide };
+function tri_bulle(array) {
+    let isSorted = false;
+
+    while (!isSorted) {
+        isSorted = true;
+        for (i = 0; i < array.length - 1; i++) {
+            next = array[i + 1];
+
+            if (array[i] > next) {
+                array[i + 1] = array[i];
+                array[i] = next;
+                isSorted = false;
+            }
+        }
+    }
+}
+
+module.exports = { tri_rapide, tri_bulle };
