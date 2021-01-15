@@ -1,4 +1,12 @@
-/* fonction de tri rapide permettant de trier par type */
+
+/**
+ * fonction de tri rapide permettant de trier par type
+ * @param {string[] or number[]} t tableau de chaine de caractère ou tableau de nombre
+ * @param {number} first le premier index du tableau
+ * @param {number} last le dernier index du tableau
+ * @param {string} sortBy le type de trie choisi
+ * @return {string[] or number[]} le tableau trié
+ */
 function tri_rapide(t, first, last, sortBy) {
     if (first < last) {
         let pivot = Math.ceil((first + last) / 2);
@@ -9,14 +17,27 @@ function tri_rapide(t, first, last, sortBy) {
     return t;
 }
 
-/* fonction d'échange */
+/**
+ * fonction d'échange
+ * @param {string[] or number[]} t la tableau
+ * @param {string or number} a le premier élément du tableau à trié
+ * @param {string or number} b le deuxième élément du tableau à trié
+ */
 function swap(t, a, b) {
     let temp = t[b];
     t[b] = t[a];
     t[a] = temp;
 }
 
-/* permet de partitioner les titres et dates du fichier json  et de retourner le premier element du tableau  après avoir échanger leurs places */
+/**
+ * permet de partitioner les éléments d'un tableau et de retourner le premier element du tableau après avoir échanger leurs places
+ * @param {string[] or number[]} t tableau de chaine de caractère ou tableau de nombre
+ * @param {number} first le premier index du tableau
+ * @param {number} last le dernier index du tableau
+ * @param {number} pivot l'index pivot du tableau
+ * @param {string} sortBy le type de trie choisi
+ * @return {string[] or number[]} le tableau trié
+ */
 function partitionner(t, first, last, pivot, sortBy) {
     swap(t, pivot, last);
     let j = first;

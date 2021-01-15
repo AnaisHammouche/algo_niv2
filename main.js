@@ -11,7 +11,7 @@ let start = new Date().getTime(); // Début du temps d'exécution du programme
 let args = process.argv; // On récupère les arguments en CLI
 
 
-/* Vérification des arguments, dans la ligne de commande*/
+/* Vérification des arguments, dans la ligne de commande */
 if (args[2] === undefined) { 
     console.log("Veuillez entrer \"-save\" ou \"-action\"");
 }
@@ -86,7 +86,7 @@ else {
                             data = sort.tri_rapide(movie, 0, movie.length - 1, "release_date");
                             if (args.includes("-save")) {
                                 const indexSave = cli.getIndex(args, "-save");
-                                dl.downloadImg(data[data.length - 1].poster, args[indexSave + 1], data[data.length - 1].title.replace(/[^a-zA-Z0-9]/g, ' '));
+                                dl.downloadImg(data[data.length - 1].poster, args[indexSave + 1], data[data.length - 1].title.replace(/[\/:*?"<>|]/g, ' '));
                                 console.log("Film trouvé : " + data[data.length - 1].title + " (" + times.convertToYear(data[data.length - 1].release_date) + ")");
                             }
                             else {
